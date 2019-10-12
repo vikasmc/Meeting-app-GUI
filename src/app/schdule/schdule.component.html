@@ -1,0 +1,55 @@
+﻿<h2>Schedule Meeting</h2>
+<form [formGroup]="scheduleForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="roomId">Room Id</label>
+        <input type="text" formControlName="roomId" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.roomId.errors }" />
+        <div *ngIf="submitted && f.roomId.errors" class="invalid-feedback">
+            <div *ngIf="f.roomId.errors.required">Room Id is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="userId">User Id</label>
+        <input type="userId" formControlName="userId" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.userId.errors }" />
+        <div *ngIf="submitted && f.userId.errors" class="invalid-feedback">
+            <div *ngIf="f.userId.errors.required">User Id is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="startTime">Start Time</label>
+        <input type="datetime-local" formControlName="startTime" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.startTime.errors }" />
+        <div *ngIf="submitted && f.startTime.errors" class="invalid-feedback">
+            <div *ngIf="f.startTime.errors.required">Start Time is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="endTime">End Time</label>
+        <input type="datetime-local" formControlName="endTime" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.endTime.errors }"  />
+        <div *ngIf="submitted && f.endTime.errors" class="invalid-feedback">
+            <div *ngIf="f.endTime.errors.required">End Time is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="topicName">Topic</label>
+        <input type="topicName" formControlName="topicName" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.topicName.errors }" />
+        <div *ngIf="submitted && f.topicName.errors" class="invalid-feedback">
+            <div *ngIf="f.topicName.errors.required">Topic is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="topicDescription">Topic discription</label>
+        <input type="topicDescription" formControlName="topicDescription" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.topicDescription.errors }" />
+        <div *ngIf="submitted && f.topicDescription.errors" class="invalid-feedback">
+            <div *ngIf="f.topicDescription.errors.required">Topic discription is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">Schedule</button>
+        <a routerLink="/home" class="btn btn-link">Cancel</a>
+    </div>
+</form>

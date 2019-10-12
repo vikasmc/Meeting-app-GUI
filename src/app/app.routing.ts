@@ -1,0 +1,21 @@
+﻿import { Routes, RouterModule } from '@angular/router';
+
+import { HomeComponent } from './home';
+import { LoginComponent } from './login';
+import { RegisterComponent } from './register';
+import { AuthGuard } from './_guards';
+import { SchduleComponent } from './schdule';
+import { RoomComponent } from './room';
+
+const appRoutes: Routes = [
+    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: LoginComponent },
+    { path: 'register', component: RegisterComponent },
+    { path: 'schdule', component: SchduleComponent },
+    { path: 'room', component: RoomComponent },
+
+    // otherwise redirect to home
+    { path: '**', redirectTo: '' }
+];
+
+export const routing = RouterModule.forRoot(appRoutes);

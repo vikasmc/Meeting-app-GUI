@@ -1,0 +1,31 @@
+﻿<h2>Add Room</h2>
+<form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="roomName">Room Name</label>
+        <input type="roomName" formControlName="roomName" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.roomName.errors }" />
+        <div *ngIf="submitted && f.roomName.errors" class="invalid-feedback">
+            <div *ngIf="f.roomName.errors.required">Room Name is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="roomLocation">Room Location</label>
+        <input type="roomLocation" formControlName="roomLocation" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.roomLocation.errors }" />
+        <div *ngIf="submitted && f.roomLocation.errors" class="invalid-feedback">
+            <div *ngIf="f.roomLocation.errors.required">Room Location required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="roomSize">Room size</label>
+        <input type="roomSize" formControlName="roomSize" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.roomSize.errors }" />
+        <div *ngIf="submitted && f.roomSize.errors" class="invalid-feedback">
+            <div *ngIf="f.roomSize.errors.required">Room Size is required</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">Add</button>
+        <a routerLink="/home" class="btn btn-link">Cancel</a>
+    </div>
+</form>
