@@ -35,7 +35,8 @@ export class SearchComponent implements OnInit {
         private authenticationService: AuthenticationService,
         private schedulerService : SchedulerService,
         private roomService : RoomService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private alertService: AlertService
     ) {
         // get the user information ferom the auth service
         if (this.authenticationService.currentUserValue) { 
@@ -95,6 +96,9 @@ export class SearchComponent implements OnInit {
             (data) =>  {
             console.log(data);
             this.searchUser = data;
+        },
+        error => {
+            this.alertService.error('Max enrolment reached or something went wrong');
         });
         this.scheduleList.push(this.enrollObj.schedulerId);
         console.log(this.scheduleList);
