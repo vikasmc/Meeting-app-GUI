@@ -1,8 +1,8 @@
 import { Timestamp } from "rxjs";
 
 export class Schedule {
-    userId: string;
-    rommId: string;
+    userId: number;
+    roomName: string;
     topicName: string;
     topicDescription: string;
     startTime: Timestamp<number>;

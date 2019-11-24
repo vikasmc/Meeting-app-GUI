@@ -6,6 +6,7 @@ import { RegisterComponent } from './register';
 import { AuthGuard } from './_guards';
 import { SchduleComponent } from './schdule';
 import { RoomComponent } from './room';
+import { SearchComponent } from './search';
 import { Role } from './_models/role';
 
 const appRoutes: Routes = [
@@ -14,7 +15,7 @@ const appRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'schdule', component: SchduleComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
     { path: 'room', component: RoomComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
-
+    { path: 'search', component: SearchComponent },
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];

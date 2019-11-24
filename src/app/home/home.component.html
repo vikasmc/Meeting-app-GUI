@@ -1,2 +1,25 @@
 ﻿<h1>Hi {{currentUser.userName}}!</h1>
-<p>You're logged into Meeting App!!</p>
+<h5>Today's Schedule</h5>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">SL No</th>
+    <th scope="col">Room Name</th>
+    <th scope="col">Topic Name</th>
+    <th scope="col">Start Time</th>
+    <th scope="col">End Time</th>
+    <th scope="col">Presenter</th>
+    <!-- <th scope="col">Enroll</th> -->
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let meet of meets; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{meet.roomName }}</td>
+    <td>{{meet.topic}}</td>
+    <td>{{meet.startTime}}</td>
+    <td>{{meet.endTime}}</td>
+    <td>{{meet.presenter}}</td>
+  </tr>
+  </tbody>
+</table>

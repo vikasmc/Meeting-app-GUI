@@ -8,6 +8,7 @@ import { User } from '@/_models';
 import { SchedulerService } from '@/_services/scheduler.service';
 import { RoomService } from '@/_services/room.service';
 import { Room } from '@/_models/room';
+import { Schedule } from '@/_models/schedule';
 
 @Component({templateUrl: 'schdule.component.html'})
 export class SchduleComponent implements OnInit {
@@ -16,8 +17,10 @@ export class SchduleComponent implements OnInit {
     submitted = false;
     loading = false;
     returnUrl: string;
-    roomNames:String[] =[];
+    roomNames: string[] =[];
     curRoom: Room[];
+    selectedRoomName: string = "Default";
+    scheduleObject: Schedule;
 
     City: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
 
@@ -34,14 +37,10 @@ export class SchduleComponent implements OnInit {
         if (this.authenticationService.currentUserValue) { 
             this.currentUser=this.authenticationService.currentUserValue;
         }
-
-        
     }
 
     ngOnInit() {
         this.scheduleForm = this.formBuilder.group({
-            roomId: ['', Validators.required],
-            userId: ['', Validators.required],
             startTime: ['', Validators.required],
             endTime: ['', Validators.required],
             topicName: ['', Validators.required],
@@ -49,23 +48,25 @@ export class SchduleComponent implements OnInit {
         });
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
         this.onLoadingOfPage();
-
     }
 
     // convenience getter for easy access to form fields
     get f() { return this.scheduleForm.controls; }
-
 
     onSubmit() {
         this.submitted = true;
 
         // stop here if form is invalid
         if (this.scheduleForm.invalid) {
+            // if(this.selectedRoomName == "Default") {
             return;
         }
 
         this.loading = true;
-        this.schedulerService.Schedule(this.scheduleForm.value)
+        this.scheduleObject = this.scheduleForm.value;
+        this.scheduleObject.userId = this.currentUser.userId;
+        this.scheduleObject.roomName = this.selectedRoomName;
+        this.schedulerService.Schedule(this.scheduleObject)
             .pipe(first())
             .subscribe(
                 data => {
@@ -73,7 +74,7 @@ export class SchduleComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error('Conflicts occurred', true);
                     this.loading = false;
                 });
     }
@@ -81,13 +82,19 @@ export class SchduleComponent implements OnInit {
     onLoadingOfPage() {
         this.roomService.getAll().subscribe(
             (data: Room[]) =>  {
-                this.curRoom = data;
-                this.curRoom.forEach(roo => {
+                let i = 1;
+                data.forEach(roo => {                    
+                    if(i == 1) {
+                        this.selectedRoomName = roo.roomName;
+                    }
+                    i=2;
                     this.roomNames.push(roo.roomName);
                 })
             }
           );
     }
 
-    
+    selectChangeHandler (event: any) {
+        this.selectedRoomName = event.target.value;
+      }
 }

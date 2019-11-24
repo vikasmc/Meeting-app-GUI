@@ -1,0 +1,48 @@
+﻿<h2>Search Meeting</h2>
+<form [formGroup]="searchForm">
+    <div class="form-group">
+    <label for="roomName">Room Name</label>
+    <select class="custom-select" (change)="selectChangeHandler($event)">
+        <option value="Default">Choose your Room</option>
+        <option *ngFor="let roomName of roomNames" [ngValue]="roomName">{{roomName}}</option>
+     </select>
+    </div>
+    <div class="form-group">
+        <label for="presenter">Presenter</label>
+        <input type="text" formControlName="presenter" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="day">Date</label>
+        <input type="date" formControlName="day" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-primary" (click)= "searchForMeeting()">Search</button>        
+    </div>
+   
+    <table class="table table-striped" *ngIf="isClicked"  style="width:400px">
+        <thead>
+        <tr>
+          <th scope="col">SL No</th>
+          <th scope="col">Room Name</th>
+          <th scope="col">Topic Name</th>
+          <th scope="col">Start Time</th>
+          <th scope="col">End Time</th>
+          <th scope="col">Presenter</th>
+          <th scope="col">Enroll</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let country of meets; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ country.roomName }}</td>
+          <td>{{ country.topic  }}</td>
+          <td>{{ country.startTime  }}</td>
+          <td>{{ country.endTime }}</td>
+          <td>{{ country.presenter }}</td>
+          <td><button class="btn btn-primary" *ngIf="isEnrolled(country.scheduleId)" (click)="$event.stopPropagation();enrollStudent(country.scheduleId)">Enroll Now</button>
+            <p *ngIf="!isEnrolled(country.scheduleId)">Enrolled</p>
+          </td>    
+        </tr>
+        </tbody>
+      </table>
+</form>

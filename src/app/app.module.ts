@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent }  from './app.component';
 import { routing }        from './app.routing';
+import { FormsModule } from '@angular/forms';
 
 import { AlertComponent } from './_components';
 import {  ErrorInterceptor } from './_helpers';
@@ -13,13 +14,15 @@ import { LoginComponent } from './login';
 import { RegisterComponent } from './register';
 import { SchduleComponent } from './schdule';
 import { RoomComponent } from './room';
+import { SearchComponent } from './search';
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        routing
+        routing,
+        FormsModule
     ],
     declarations: [
         AppComponent,
@@ -28,7 +31,8 @@ import { RoomComponent } from './room';
         LoginComponent,
         RegisterComponent,
         SchduleComponent,
-        RoomComponent
+        RoomComponent,
+        SearchComponent
     ],
     providers: [
         // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
