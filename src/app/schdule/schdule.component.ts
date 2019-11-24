@@ -74,7 +74,7 @@ export class SchduleComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.alertService.error('Conflicts occurred', true);
+                    this.alertService.error('Conflicts occurred with timimg Or Something went wrong');
                     this.loading = false;
                 });
     }

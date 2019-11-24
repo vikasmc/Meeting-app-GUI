@@ -60,7 +60,7 @@ export class RoomComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error('Room Name Already Exist or Somethign went wrong');
                     this.loading = false;
                 });
     }
