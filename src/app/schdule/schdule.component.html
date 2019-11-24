@@ -9,6 +9,13 @@
         </div>
     </div>
     <div class="form-group">
+    <h4>Room-select</h4>
+    <select class="custom-select">
+        <option value="" disabled>Choose your Room</option>
+        <option *ngFor="let roomName of roomNames" [ngValue]="roomName">{{roomName}}</option>
+     </select>
+    </div>
+    <div class="form-group">
         <label for="userId">User Id</label>
         <input type="userId" formControlName="userId" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.userId.errors }" />

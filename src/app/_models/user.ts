@@ -4,4 +4,5 @@
     password: string;
     email: string;
     token: string;
+    type:string;
 }

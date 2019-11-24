@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.loginForm.controls; }
+    get f() { return this.loginForm.controls; } 
 
     onSubmit() {
         this.submitted = true;
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.alertService.error(error);
+                    this.alertService.error('User Not found', false);
                     this.loading = false;
                 });
     }

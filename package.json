@@ -7,7 +7,7 @@
     },
     "scripts": {
         "build": "webpack --mode production",
-        "start": "webpack-dev-server --mode development --open"
+        "start": "webpack-dev-server --mode development --open --proxy-config proxy.conf.json"
     },
     "license": "MIT",
     "dependencies": {
@@ -17,6 +17,7 @@
         "@angular/compiler": "^7.0.1",
         "@angular/core": "^7.0.1",
         "@angular/forms": "^7.0.1",
+        "@angular/material": "^5.1.0",
         "@angular/platform-browser": "^7.0.1",
         "@angular/platform-browser-dynamic": "^7.0.1",
         "@angular/router": "^7.0.1",

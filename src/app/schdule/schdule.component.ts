@@ -1,11 +1,13 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { first, map } from 'rxjs/operators';
 
 import { AlertService, AuthenticationService } from '@/_services';
 import { User } from '@/_models';
 import { SchedulerService } from '@/_services/scheduler.service';
+import { RoomService } from '@/_services/room.service';
+import { Room } from '@/_models/room';
 
 @Component({templateUrl: 'schdule.component.html'})
 export class SchduleComponent implements OnInit {
@@ -14,7 +16,10 @@ export class SchduleComponent implements OnInit {
     submitted = false;
     loading = false;
     returnUrl: string;
+    roomNames:String[] =[];
+    curRoom: Room[];
 
+    City: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan'];
 
     constructor(
         private formBuilder: FormBuilder,
@@ -22,12 +27,15 @@ export class SchduleComponent implements OnInit {
         private route: ActivatedRoute,
         private authenticationService: AuthenticationService,
         private schedulerService : SchedulerService,
+        private roomService : RoomService,
         private alertService: AlertService
     ) {
         // get the user information ferom the auth service
         if (this.authenticationService.currentUserValue) { 
             this.currentUser=this.authenticationService.currentUserValue;
         }
+
+        
     }
 
     ngOnInit() {
@@ -40,6 +48,8 @@ export class SchduleComponent implements OnInit {
             topicDescription: ['', Validators.required]
         });
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+        this.onLoadingOfPage();
+
     }
 
     // convenience getter for easy access to form fields
@@ -66,6 +76,17 @@ export class SchduleComponent implements OnInit {
                     this.alertService.error(error);
                     this.loading = false;
                 });
+    }
+
+    onLoadingOfPage() {
+        this.roomService.getAll().subscribe(
+            (data: Room[]) =>  {
+                this.curRoom = data;
+                this.curRoom.forEach(roo => {
+                    this.roomNames.push(roo.roomName);
+                })
+            }
+          );
     }
 
     
