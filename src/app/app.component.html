@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/">Home</a>
-        <a class="nav-item nav-link" routerLink="schdule" *ngIf="isAdmin">Schdule</a>
+        <a class="nav-item nav-link" routerLink="schdule" *ngIf="isAdmin">Schedule</a>
         <a class="nav-item nav-link" routerLink="room" *ngIf="isAdmin">New Room</a>
         <a class="nav-item nav-link" routerLink="search" >Search</a>
         <a class="nav-item nav-link" (click)="logout()">Logout</a>
